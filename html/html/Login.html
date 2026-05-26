@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录</title>
+    <style>
+       /* 让页面内容位于视频之上 */
+       * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* 视频背景容器 */
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;  /* 放到最底层 */
+        }
+
+    
+        .video-background video {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* 页面内容样式 */
+        .content {
+            position: relative;
+            color: white;
+            text-align: center;
+            padding-top: 20vh;
+            font-family: Arial, sans-serif;
+            text-shadow: 0 0 5px black;
+        }
+        form {
+            background: rgba(255,255,255,0.8);
+            padding: 20px;
+            border-radius: 8px;
+            width: 300px;
+            margin: 300px auto;
+        }
+        
+       
+    </style>
+</head>
+<body>
+    <!-- 视频背景 -->
+    <div class="video-background">
+        <video autoplay loop muted playsinline>
+            <source src="images\3.mp4" type="video/mp4">
+        </video>
+    </div>
+    
+    <div class="overlay"></div>
+    <form id="loginForm">
+        <label for="username">用户名:</label>
+        <input type="text" id="username" name="username" required><br><br>
+        <label for="password">密码:</label>
+        <input type="password" id="password" name="password" required><br><br>
+        <button type="button" id="loginBtn">登录</button>
+        <button type="button" id="register">注册</button>
+
+    </form>
+    <!-- 其他部分不变，只修改 script -->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    // 获取注册按钮
+    // const registerBtn = document.querySelector('#register');
+    
+    // registerBtn.addEventListener('click', (event) => {
+    //     event.preventDefault();  // 阻止表单提交刷新页面
+
+    //     // 1. 获取表单中的值
+    //     const username = document.getElementById('username').value;
+    //     const password = document.getElementById('password').value;
+        // 如果表单中有性别单选框，再获取，否则可以省略 gender
+        // 假设你补上了性别选框，获取方式如下：
+        // const genderRadio = document.querySelector('input[name="gender"]:checked');
+        // const gender = genderRadio ? genderRadio.value : null;
+
+        // 2. 发送 POST 请求（JSON 格式）
+        // axios({
+        //     method: 'post',
+        //     url: 'http://localhost:8080/user/login',   // 必须加 http://
+        //     data: {
+        //         username: username,
+        //         password: password
+        //         // gender: gender   // 有性别字段再放开
+        //     }
+        // })
+        // .then((response) => {
+        //     console.log('后端返回的数据:', response.data);
+        //     alert('注册请求已发送');
+        // })
+        // .catch((error) => {
+        //     console.error('请求失败:', error);
+        //     alert('请求失败，请检查网络或后端地址');
+        // });
+
+
+        // axios({
+        //     method: 'get',
+        //     url: 'http://localhost:8080/search/username',
+        //     data: {
+        //         name: username
+        //     }
+        //     }).then((response) => {
+        //         console.log('后端返回的数据:', response.data);
+        //         alert('查询请求已发送');
+        //     }).catch((error) => {
+        //         console.error('请求失败:', error);
+        //         alert('请求失败，请检查网络或后端地址');
+        // });
+        // 假设登录接口返回 JSON
+        document.getElementById('loginBtn').addEventListener('click', async () => {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            try {
+                const res = await axios.post('http://localhost:8080/user/login', { username, password });
+                if (res.data.code === 1) {
+                    window.location.href = 'note.html';  // 登录成功后跳转到笔记页面
+                } else {
+                    alert(res.data.message);
+                }
+                } catch (err) {
+                alert('登录失败');
+            }
+    });
+
+     document.getElementById('register').addEventListener('click', async () => {
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        
+        try {
+        const res = await axios.post('http://localhost:8080/user/register', { username, password });
+        if (res.data.code === 200) {
+            alert('注册成功，请登录');
+            // 可选：自动跳转到登录页
+            // window.location.href = '/login';
+        } else {
+            alert(res.data.message);
+        }
+        } catch (err) {
+            alert('注册失败');
+        }
+    axios.post('http://localhost:8080/user/login', { username: 'test', password: 'test' })
+        .then(res => console.log('成功:', res.data))
+        .catch(err => console.error('失败:', err));
+
+});
+    </script>
+</body>
+</html>

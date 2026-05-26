@@ -1,0 +1,41 @@
+spring:
+  application:
+    name: LearnDay
+    #配置数据库的连接信息
+  datasource:
+    url: jdbc:mysql://localhost:3306/learn_day
+    username: root
+    password: 71304002yll
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  servlet:
+    multipart:
+      max-file-size: 1MB
+  jackson:
+    mapper:
+      sort-properties-alphabetically: false
+  web:
+    cors:
+      allowed-origins: "http://127.0.0.1:5500"
+      allowed-methods: "GET,POST,PUT,DELETE,OPTIONS"
+      allowed-headers: "*"
+      allow-credentials: true
+      max-age: 3600
+mybatis:
+  mapper-locations: classpath:com/liyu/Mapper/*.xml;
+  configuration:
+    #配置MyBatis的日志输出
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    #配置MyBatis的驼峰命名法
+    map-underscore-to-camel-case: true
+
+  #配置事务管理日志级别
+logging:
+  level:
+    org.springframework.jdbc.support.JdbcTransactionManager: debug
+
+
+aliyun:
+  oss:
+    endpoint: https://oss-cn-beijing.aliyuncs.com
+    bucketName: javaweb0317
+    region: cn-beijing
