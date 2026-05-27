@@ -13,4 +13,5 @@ public interface UserService {
     void CreateUser(User user);
 
     LoginInfo Login(User user);
+
 }

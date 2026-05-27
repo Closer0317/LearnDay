@@ -3,19 +3,15 @@ package com.liyu.Controller;
 import com.liyu.Pojo.LoginInfo;
 import com.liyu.Pojo.Result;
 import com.liyu.Pojo.User;
-import com.liyu.Service.Impl.UserServiceImpl;
 import com.liyu.Service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
 @RequestMapping("/user")
-public class RegisterController {
+public class UserController {
     @Autowired
     private UserService userService;
 

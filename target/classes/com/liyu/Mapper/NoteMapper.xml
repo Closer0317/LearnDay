@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liyu.Mapper.NoteMapper">
+
+    <insert id="CreateNote" parameterType="com.liyu.Pojo.Note">
+        INSERT INTO note(user_id, title, sub_title, content, cover_image)
+        VALUES (#{userId}, #{title}, #{subTitle}, #{content}, #{coverImage})
+    </insert>
+
+</mapper>

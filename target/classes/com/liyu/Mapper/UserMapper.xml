@@ -5,8 +5,8 @@
 <mapper namespace="com.liyu.Mapper.UserMapper">
 
     <insert id="CreateUser" parameterType="com.liyu.Pojo.User" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO user (username, password, role, phone, gender)
-        VALUES (#{username}, #{password}, #{role}, #{phone}, #{gender})
+        INSERT INTO user (username, password, phone)
+        VALUES (#{username}, #{password}, #{phone})
     </insert>
     <select id="SearchUser" resultType="com.liyu.Pojo.User">
         select id,username,avatar from user where username like concat('%', #{name}, '%');

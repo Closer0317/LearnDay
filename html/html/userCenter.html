@@ -1,12 +1,79 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>userCenter</title>
+    <title>个人中心</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background-color: black;
+        }
+        .container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #1E2022;
+            border-radius: 12px;
+            text-align: center;
+        }
+        .avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #fff;
+            box-shadow: 0 2px 8px white;
+        }
+        p {
+            background-color: #1E2022;
+            color: white;
+        }
+        .logout {
+            margin-top: 30px;
+            padding: 10px 20px;
+            background-color: #E63946;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+    </style>
 </head>
 <body>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     
+    <div class="container">
+        <img id="avatar" class="avatar" alt="头像">
+        <div class="info">
+            <p><strong>ID：</strong><span id="userId"></span></p>
+            <p><strong>用户名：</strong><span id="username"></span></p>
+        </div>
+        <button id="logoutBtn" class="logout">退出登录</button>
+    </div>
+
+    <script>
+        // 从 sessionStorage 读取用户数据
+        const userStr = sessionStorage.getItem('user');
+        if (!userStr) {
+            // 没有登录信息，跳回登录页
+            window.location.href = '/userLogin.html';
+        } else {
+            const user = JSON.parse(userStr);
+            // 渲染到页面
+            document.getElementById('avatar').src = user.avatar;
+            document.getElementById('userId').textContent = user.id;
+            document.getElementById('username').textContent = user.username;
+        }
+
+        // 退出登录：清除存储并跳转
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            sessionStorage.removeItem('user');
+            window.location.href = 'userLogin.html';
+        });
+    </script>
 </body>
 </html>

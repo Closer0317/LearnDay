@@ -14,4 +14,5 @@ public interface UserMapper {
     List<User> SearchUser(String name);
 
     LoginInfo Login(User user);
+
 }

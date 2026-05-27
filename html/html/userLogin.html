@@ -152,74 +152,9 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script>
-        // 获取表单元素
-        const loginFormDiv = document.getElementById('loginForm');
-        const registerFormDiv = document.getElementById('registerForm');
-        const toRegisterBtn = document.getElementById('toRegisterBtn');
-        const toLoginBtn = document.getElementById('toLoginBtn');
-
-        // 切换函数：显示登录，隐藏注册
-        function showLogin() {
-            loginFormDiv.classList.remove('hidden');
-            registerFormDiv.classList.add('hidden');
-        }
-
-        // 切换函数：显示注册，隐藏登录
-        function showRegister() {
-            loginFormDiv.classList.add('hidden');
-            registerFormDiv.classList.remove('hidden');
-        }
-
-        // 绑定点击事件
-        toRegisterBtn.addEventListener('click', showRegister);
-        toLoginBtn.addEventListener('click', showLogin);
-
-        // 示例：登录按钮的逻辑（可根据后端对接）
-        document.getElementById('doLogin').addEventListener('click', () => {
-            const username = document.getElementById('loginUsername').value;
-            const password = document.getElementById('loginPassword').value;
-            if (!username || !password) {
-                alert('请输入用户名和密码');
-                return;
-            }
-            axios.post('http://localhost:8080/user/login', { username, password })
-                .then(response => {
-                    console.log('登录成功', response.data);
-                    alert('登录成功！');
-                    window.location.href = 'note.html'; // 登录成功后跳转到主页
-                })
-                .catch(error => {
-                    console.error('登录失败', error);
-                    alert('登录失败，请检查用户名和密码');
-                });
-        });
-
-        // 示例：注册按钮的逻辑
-        document.getElementById('doRegister').addEventListener('click', () => {
-            const username = document.getElementById('regUsername').value;
-            const pwd = document.getElementById('regPassword').value;
-            const confirm = document.getElementById('regConfirmPwd').value;
-            const phone = document.getElementById('regPhone').value;
-            if (!username || !pwd) {
-                alert('请填写完整');
-                return;
-            }
-            if (pwd !== confirm) {
-                alert('两次密码不一致');
-                return;
-            }
-            axios.post('http://localhost:8080/user/register', { username, password: pwd, phone })
-                .then(response => {
-                    console.log('注册成功', response.data);
-                    alert('注册成功！请登录');
-                    showLogin(); // 注册成功后切换到登录表单
-                })
-                .catch(error => {
-                    console.error('注册失败', error);
-                    alert('注册失败，请重试');
-                });
-        });
-    </script>
+    <script src="../js/showLogin.js"></script>
+    <script src="../js/showRegister.js"></script>
+    <script src="../js/userLogin.js"></script>
+    <script src="../js/userRegister.js"></script>
 </body>
 </html>
