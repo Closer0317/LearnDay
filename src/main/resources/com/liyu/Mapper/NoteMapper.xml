@@ -8,5 +8,16 @@
         INSERT INTO note(user_id, title, sub_title, content, cover_image)
         VALUES (#{userId}, #{title}, #{subTitle}, #{content}, #{coverImage})
     </insert>
+    <update id="ModifyNote">
+        UPDATE note
+        SET content = #{content}, update_time = NOW()
+        WHERE id = #{id}
+    </update>
+    <delete id="DeleteNote">
+        DELETE FROM note where id = #{id}
+    </delete>
+    <select id="QueryNoteById" resultType="com.liyu.Pojo.Note">
+        SELECT title, sub_title, content, cover_image, create_time, update_time FROM note where id = #{id}
+    </select>
 
 </mapper>

@@ -6,7 +6,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @MapperScan("com.liyu.Mapper")
-@ComponentScan(basePackages = {"com.liyu.Service", "com.liyu.Controller"})
 @SpringBootApplication
 public class LearnDayApplication {
 

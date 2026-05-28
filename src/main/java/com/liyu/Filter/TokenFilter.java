@@ -18,6 +18,10 @@ public class TokenFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
+        if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
+            filterChain.doFilter(request, response);
+            return;
+        }
         //获取请求路径
         String requestURI = request.getRequestURI();
         //判断路径是否包括登录和注册

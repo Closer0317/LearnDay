@@ -11,7 +11,7 @@ document.querySelector('#doRegister').addEventListener('click', ()=>{
                 alert('两次密码不一致');
                 return;
             }
-            axios.post('http://localhost:8080/user/register', { username, password: pwd, phone })
+            axios.post('http://127.0.0.1:8080/user/register', { username, password: pwd, phone })
                 .then(response => {
                     console.log('注册成功', response.data);
                     alert('注册成功！请登录');

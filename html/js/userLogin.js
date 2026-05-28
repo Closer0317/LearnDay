@@ -1,4 +1,5 @@
-document.querySelector('#doLogin').addEventListener('click', ()=>{
+document.querySelector('#doLogin').addEventListener('click', (e)=>{
+    e.preventDefault();
     const username = document.getElementById('loginUsername').value;
     const password = document.getElementById('loginPassword').value;
     // const token = document.getElementById('loginToken').value;
@@ -6,7 +7,14 @@ document.querySelector('#doLogin').addEventListener('click', ()=>{
         alert('请输入用户名和密码');
         return;
     }
-    axios.post('http://localhost:8080/user/login', { username, password})
+    axios.post('http://127.0.0.1:8080/user/login', 
+        { username, password},
+        {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+    )
         .then(response => {
         console.log('登录成功', response.data);
         sessionStorage.setItem('user', JSON.stringify(response.data.data)); // 将用户信息存储在 sessionStorage 中
